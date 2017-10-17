@@ -99,6 +99,11 @@ app.use(function(err, req, res, next) {
     var code = 500;
 
     console.error(err.stack || err);
+    
+    var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    var method = req.method;
+    var url = req.url;
+    console.log("IP " + ip + " " + method + " " + url);
 
     // Return error
     res.format({
